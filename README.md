@@ -1,94 +1,39 @@
 # AI Labs — CNN Tensorflow Image ( AI Engineering )
-Two mini-projects:
-1) **Text classification** — scikit-learn + TF-IDF, CLI & Tkinter GUI, metrics (F1 / ROC-AUC)
-2) **CNN image classification** — tf.keras on CIFAR-10, accuracy + confusion matrix
+1) Objectifs
 
-## Structure
-- `text-classifier/` → sklearn, GUI
-- `image-classifier/` → tf.keras CNN
+Deux mini-projets runnables :
 
-## Quickstart
-```bash
-# Text classification
+Text classification (scikit-learn + TF-IDF) avec CLI & GUI Tkinter.
+
+CNN CIFAR-10 (tf.keras) avec export modèle, confusion matrix.
+Docker & tests pour reproductibilité.
+
+2) Structure
+text-classifier/: requirements.txt, data/sample.csv, src/{train.py,inference.py,evaluate.py}, app/gui.py, models/, tests/
+image-classifier/: requirements.txt, src/{train.py,inference.py,utils.py}, samples/, models/, tests/
+Makefile (dans chaque sous-projet)
+
+3) Démarrage
+# Text
 pip install -r text-classifier/requirements.txt
 python text-classifier/src/train.py --data text-classifier/data/sample.csv --out text-classifier/models/
 python text-classifier/app/gui.py
-# or: python text-classifier/src/inference.py --text "Exemple"
 
-# CNN CIFAR-10
+# Image
 pip install -r image-classifier/requirements.txt
 python image-classifier/src/train.py
 python image-classifier/src/inference.py --img image-classifier/samples/airplane.png
 
-What you get
+4) Tests & Docker
+pytest -q
+docker build -t ai-labs-text-image .
 
-Docker & tests (pytest) ready
+5) Résultats attendus
 
-Reproducible runs (Makefile), saved models, metrics & plots
+Texte: F1/ROC-AUC ≥ baseline, confusion matrix en PNG.
 
+Image: accuracy & confusion matrix, courbes d’apprentissage.
 
----
+6) Sécurité & bonnes pratiques
 
-### Crée l’arborescence (vide) puis uploade tes fichiers dedans
-
-
-ai-labs-text-and-image/
-text-classifier/
-requirements.txt
-data/sample.csv
-src/{train.py,inference.py,evaluate.py}
-app/gui.py
-models/ (vide)
-tests/test_inference.py
-Makefile
-image-classifier/
-requirements.txt
-src/{train.py,inference.py,utils.py}
-samples/airplane.png
-models/ (vide)
-tests/test_inference.py
-Makefile
-
-
----
-
-### Colle ces fichiers “prêts à l’emploi”
-
-**text-classifier/requirements.txt**
-
-
-scikit-learn pandas numpy matplotlib pillow tkinter
-
-
-**image-classifier/requirements.txt**
-
-
-tensorflow keras numpy pandas matplotlib pillow
-
-
-**text-classifier/Makefile**
-
-
-install: ; pip install -r requirements.txt
-train: ; python src/train.py --data data/sample.csv --out models/
-gui: ; python app/gui.py
-test: ; pytest -q
-
-
-**image-classifier/Makefile**
-
-
-install: ; pip install -r requirements.txt
-train: ; python src/train.py
-infer: ; python src/inference.py --img samples/airplane.png
-test: ; pytest -q
-
-
----
-
-### (Optionnel mais pro, 30s)
-Dans **About → Topics**, ajoute :
-`python, scikit-learn, nlp, text-classification, tkinter, tensorflow, keras, cnn, image-classification, docker, pytest`
-
-C’est le plus court chemin “CDI-ready” sans te faire perdre de temps.
-::contentReference[oaicite:0]{index=0}
+Aucun secret dans le code, .gitignore pour models/, badges CI dans README.
