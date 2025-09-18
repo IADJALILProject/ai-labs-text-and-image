@@ -1,4 +1,4 @@
-# AI Labs — Text & Image ( AI Engineering )
+# AI Labs — CNN Tensorflow Image ( AI Engineering )
 Two mini-projects:
 1) **Text classification** — scikit-learn + TF-IDF, CLI & Tkinter GUI, metrics (F1 / ROC-AUC)
 2) **CNN image classification** — tf.keras on CIFAR-10, accuracy + confusion matrix
